@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils/utils';
 
-function Login() {
+function Login({setIsLoggedIn}) {
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: ''
@@ -39,6 +39,7 @@ function Login() {
                 handleSuccess(message);
                 localStorage.setItem('token', jwtToken);
                 localStorage.setItem('loggedInUser', name);
+                setIsLoggedIn(true);
                 setTimeout(() => {
                     navigate('/home');
                 }, 1000);

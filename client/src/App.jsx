@@ -8,7 +8,7 @@ import { PicLAB } from './assets';
 // PrivateRoute component to protect routes
 const PrivateRoute = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace/>;
   }
   return children;
 };
@@ -97,8 +97,13 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token);
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
   }, []);
+  
 
   return (
     <BrowserRouter>
@@ -144,7 +149,7 @@ const AppContent = ({ isLoggedIn, setIsLoggedIn }) => {
             } 
           />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         </Routes>
       </main>
       <Footer />
