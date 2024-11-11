@@ -30,7 +30,7 @@ app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
 
 app.use('/auth', AuthRouter);
-app.use('/api/v1/profile', profileRoutes); 
+app.use('/api/v1', profileRoutes); 
 app.get('/', async (req, res) => {
   res.status(200).json({
     message: 'Hello from DALL.E!',

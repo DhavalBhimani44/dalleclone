@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import User from '../mongodb/models/User.js';
 
 const getUserProfile = async (req, res) => {

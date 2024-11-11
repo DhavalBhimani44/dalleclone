@@ -36,6 +36,13 @@ const Header = ({ isLoggedIn, handleLogout }) => (
             Create
             <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </Link>
+          <Link
+            to="/Profile"
+            className="font-inter font-medium text-white px-4 py-2 relative group"
+          >
+            Profile
+            <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          </Link>
         </>
       )}
 
@@ -128,8 +135,14 @@ const AppContent = ({ isLoggedIn, setIsLoggedIn }) => {
               </PrivateRoute>
             } 
           />
-          
-          <Route path="/profile" element={<Profile />} />
+          <Route 
+            path="/profile" 
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <Profile />
+              </PrivateRoute>
+            } 
+          />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
