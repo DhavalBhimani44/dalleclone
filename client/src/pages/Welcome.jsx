@@ -9,13 +9,24 @@ const Welcome = () => {
         <p className="text-[#4C4C4C] text-[16px] mb-6">
           Discover and share creative, AI-generated images with our vibrant community. Dive in, get inspired, and contribute your own masterpieces!
         </p>
-        
+
         <div className="flex gap-4 justify-center">
-          <Link to="/login" className="font-inter font-medium bg-[#9DD245] text-white px-6 py-3 rounded-md">
-            Login
+          <Link
+            to="/login"
+            className="font-inter font-medium text-white px-4 py-2 rounded-md relative overflow-hidden group transform transition-all duration-500 hover:scale-105"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-[#7FFF00] via-[#32CD32] to-[#228B22] opacity-80 transition-opacity duration-500 group-hover:opacity-100"></span>
+            <span className="relative z-10">Login</span>
+            <span className="absolute inset-0 border border-transparent rounded-md group-hover:border-[#228B22] transition-all duration-500 ease-in-out"></span>
           </Link>
-          <Link to="/signup" className="font-inter font-medium bg-white text-black px-6 py-3 rounded-md">
-            Signup
+          
+          <Link
+            to="/signup"
+            className="font-inter font-medium text-black px-4 py-2 rounded-md relative overflow-hidden group transform transition-all duration-500 hover:scale-105"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-white via-gray-200 to-gray-300 opacity-80 transition-opacity duration-500 group-hover:opacity-100"></span>
+            <span className="relative z-10">Signup</span>
+            <span className="absolute inset-0 border border-transparent rounded-md group-hover:border-gray-500 transition-all duration-500 ease-in-out"></span>
           </Link>
         </div>
       </div>
