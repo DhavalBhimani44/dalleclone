@@ -7,6 +7,7 @@ import AuthRouter from './routes/AuthRouter.js';
 import connectDB from './mongodb/connect.js';
 import postRoutes from './routes/postRoutes.js';
 import dalleRoutes from './routes/dalleRoutes.js';
+import profileRoutes from './routes/profileRouter.js';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
 
 app.use('/auth', AuthRouter);
+app.use('/api/v1/profile', profileRoutes); 
 app.get('/', async (req, res) => {
   res.status(200).json({
     message: 'Hello from DALL.E!',
