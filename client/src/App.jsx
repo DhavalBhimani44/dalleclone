@@ -13,10 +13,31 @@ const App = () => (
       </Link>
 
       <div className="flex gap-4">
-        <Link to="/" className="font-inter font-medium bg-[#9DD245] text-white px-4 py-2 rounded-md">Home</Link>
-        <Link to="/create-post" className="font-inter font-medium bg-[#9DD245] text-white px-4 py-2 rounded-md">Create</Link>
-        
-        <Link to="/signup" className="font-inter font-medium bg-white text-black transition duration-500 px-4 py-2 rounded-md">Signup/Login</Link>
+        <Link
+          to="/"
+          className="font-inter font-medium text-white px-4 py-2 relative group"
+        >
+          Home
+          <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
+        </Link>
+
+
+        <Link
+          to="/create-post"
+          className="font-inter font-medium text-white px-4 py-2 relative group"
+        >
+          Create
+          <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
+        </Link>
+
+        <Link
+          to="/signup"
+          className="font-inter font-medium text-white px-4 py-2 rounded-md relative overflow-hidden group transform transition-all duration-500 hover:scale-105"
+        >
+          <span className="absolute inset-0 bg-gradient-to-r from-[#7FFF00] via-[#32CD32] to-[#228B22] opacity-80 transition-opacity duration-500 group-hover:opacity-100"></span>
+          <span className="relative z-10">Signup/Login</span>
+          <span className="absolute inset-0 border border-transparent rounded-md group-hover:border-[#228B22] transition-all duration-500 ease-in-out"></span>
+        </Link>
       </div>
     </header>
 
