@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Home, CreatePost, Profile, Signup, Login, Welcome } from './pages';
-import { PicLAB } from './assets'
+import { PicLAB } from './assets';
+
+// PrivateRoute component to protect routes
+const PrivateRoute = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+};
 
 const Header = ({ isLoggedIn, handleLogout }) => (
   <header className="w-full flex justify-between items-center bg-[#0E0E0E] sm:px-8 px-4 py-4">
@@ -11,22 +19,27 @@ const Header = ({ isLoggedIn, handleLogout }) => (
       <img src={PicLAB} alt="logo" className="w-28 object-contain rounded-lg" />
     </Link>
     <div className="flex gap-4">
-      <Link
-        to="/"
-        className="font-inter font-medium text-white px-4 py-2 relative group"
-      >
-        Home
-        <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
-      </Link>
+      {isLoggedIn && (
+        <>
+          <Link
+            to="/home"
+            className="font-inter font-medium text-white px-4 py-2 relative group"
+          >
+            Home
+            <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          </Link>
 
-      <Link
-        to="/create-post"
-        className="font-inter font-medium text-white px-4 py-2 relative group"
-      >
-        Create
-        <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
-      </Link>
+          <Link
+            to="/create-post"
+            className="font-inter font-medium text-white px-4 py-2 relative group"
+          >
+            Create
+            <span className="absolute left-0 bottom-0 h-[3px] w-0 bg-[#76B900] transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          </Link>
+        </>
+      )}
 
+      {/* Conditionally render Logout or Signup/Login button based on login status */}
       {isLoggedIn ? (
         <Link
           to="/login"
@@ -96,9 +109,26 @@ const AppContent = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <main className="sm:p-8 px-4 py-8 w-full bg-[#181818] min-h-[calc(100vh-145px)] flex justify-center items-center">
         <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/" element={<Welcome isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>} />
+          
+          {/* Protect /home and /create-post routes */}
+          <Route 
+            path="/home" 
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <Home />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/create-post" 
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <CreatePost />
+              </PrivateRoute>
+            } 
+          />
+          
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

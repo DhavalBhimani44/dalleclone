@@ -40,7 +40,7 @@ function Login() {
                 localStorage.setItem('token', jwtToken);
                 localStorage.setItem('loggedInUser', name);
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/home');
                 }, 1000);
             } else if (error) {
                 const details = error?.details[0].message;
