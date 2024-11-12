@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/profile', {
+        const response = await axios.get('https://dalleclone-a8np.onrender.com/api/v1/profile', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -37,7 +37,7 @@ const Profile = () => {
   const handleSaveClick = async () => {
     try {
       await axios.put(
-        'http://localhost:8080/api/v1/profile',
+        'https://dalleclone-a8np.onrender.com/api/v1/profile',
         { name: newUsername },
         {
           headers: {
@@ -56,7 +56,7 @@ const Profile = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete('http://localhost:8080/api/v1/profile', {
+      await axios.delete('https://dalleclone-a8np.onrender.com/api/v1/profile', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
