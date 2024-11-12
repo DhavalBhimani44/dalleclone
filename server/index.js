@@ -24,7 +24,13 @@ const startServer = async () => {
 startServer();
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: 'https://piclab-flexi.vercel.app',
+    methods: 'GET, POST, PUT, DELETE',
+    allowedHeaders: 'Content-Type, Authorization'
+  }
+));
 
 app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
