@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Link, Route, Routes, useNavigate, Navigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Home, CreatePost, Profile, Signup, Login, Welcome } from './pages';
-import { PicLAB } from './assets';
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  Navigate,
+  HashRouter,
+} from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Home, CreatePost, Profile, Signup, Login, Welcome } from "./pages";
+import { PicLAB } from "./assets";
 
 // PrivateRoute component to protect routes
 const PrivateRoute = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) {
-    return <Navigate to="/login" replace/>;
+    return <Navigate to="/login" replace />;
   }
   return children;
 };
@@ -73,7 +81,9 @@ const Header = ({ isLoggedIn, handleLogout }) => (
 
 const Footer = () => (
   <footer className="w-full flex justify-center items-center bg-[#0E0E0E] sm:px-8 px-4 py-4">
-    <p className="font-inter text-sm text-gray-400">&copy; 2024 PicLAB. All rights reserved.</p>
+    <p className="font-inter text-sm text-gray-400">
+      &copy; 2024 PicLAB. All rights reserved.
+    </p>
   </footer>
 );
 
@@ -81,11 +91,11 @@ const useLogout = (setIsLoggedIn) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setIsLoggedIn(false);
-    toast.success('User successfully logged out');
+    toast.success("User successfully logged out");
     setTimeout(() => {
-      navigate('/login');
+      navigate("/login");
     }, 1000);
   };
 
@@ -96,20 +106,19 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
     }
   }, []);
-  
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppContent isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <ToastContainer />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
@@ -121,35 +130,43 @@ const AppContent = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <main className="sm:p-8 px-4 py-8 w-full bg-[#181818] min-h-[calc(100vh-145px)] flex justify-center items-center">
         <Routes>
-          <Route path="/" element={<Welcome isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>} />
-          
+          <Route
+            path="/"
+            element={
+              <Welcome isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+            }
+          />
+
           {/* Protect /home and /create-post routes */}
-          <Route 
-            path="/home" 
+          <Route
+            path="/home"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
                 <Home />
               </PrivateRoute>
-            } 
+            }
           />
-          <Route 
-            path="/create-post" 
+          <Route
+            path="/create-post"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
                 <CreatePost />
               </PrivateRoute>
-            } 
+            }
           />
-          <Route 
-            path="/profile" 
+          <Route
+            path="/profile"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
                 <Profile />
               </PrivateRoute>
-            } 
+            }
           />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route
+            path="/login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
         </Routes>
       </main>
       <Footer />
