@@ -95,7 +95,7 @@ function Login({setIsLoggedIn}) {
                     </p>
                 </form>
             </div>
-            <ToastContainer />
+            <ToastContainer autoClose={1000} />
         </div>
     );
 }

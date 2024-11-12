@@ -99,7 +99,7 @@ function Signup() {
                         <Link to="/login" className="font-medium text-blue-500 hover:underline">Login</Link>
                     </p>
                 </form>
-                <ToastContainer />
+                <ToastContainer autoClose={1000} />
             </div>
         </div>
     )
