@@ -66,7 +66,7 @@ const CreatePost = () => {
 
         await response.json();
         alert('Success');
-        navigate('/');
+        navigate('/home');
       } catch (err) {
         alert(err);
       } finally {
